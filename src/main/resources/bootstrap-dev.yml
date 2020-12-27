@@ -1,0 +1,41 @@
+logging.level:
+  org:
+    springframework:
+      cloud: DEBUG
+      web: DEBUG
+
+spring:
+  application:
+    name: zuul-gateway
+  cloud:
+    config:
+      uri: http://localhost:8080
+      label: release(_)1.0
+      discovery:
+        enabled: false
+    vault:
+      namespace: secret
+      token: ${VAULT_TOKEN}
+      scheme: http
+      kv.enabled: true
+    bus:
+      id: ${spring.application.name}:${spring.profiles.active}:${random.value}
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 9011
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring.jwt:
+  username: ${spring.application.name}
+  password: notused
+  endpoint: http://localhost:10111/token
+
