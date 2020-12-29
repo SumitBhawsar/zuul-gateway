@@ -26,6 +26,8 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
+	implementation 'org.bitbucket.b_c:jose4j:0.7.3'
 }
 
 dependencyManagement {

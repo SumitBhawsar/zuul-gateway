@@ -40,3 +40,4 @@ spring.jwt:
 zuul:
   host:
     connect-timeout-millis: 1
+zuul.routes.demo-api-a.channels: sysChannel-1, sysChannel-2
