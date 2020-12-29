@@ -3,15 +3,16 @@ logging.level:
     springframework:
       cloud: DEBUG
       web: DEBUG
+
 spring:
   application:
     name: zuul-gateway
   cloud:
     config:
-      uri: http://localhost:8080
-      label: release(_)1.0
+      label: release(_)2.0-eureka
       discovery:
-        enabled: false
+        enabled: true
+        service-id: spring-config-server
     vault:
       namespace: secret
       token: ${VAULT_TOKEN}
@@ -24,6 +25,14 @@ spring:
     port: 5672
     username: guest
     password: guest
+spring.jwt:
+  username: ${spring.application.name}
+  password: notused
+  endpoint: http://localhost:10111/token
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
 
 server:
   port: 9001
@@ -32,12 +41,3 @@ management:
     web:
       exposure:
         include: '*'
-
-spring.jwt:
-  username: ${spring.application.name}
-  password: notused
-  endpoint: http://localhost:10111/token
-zuul:
-  host:
-    connect-timeout-millis: 1
-zuul.routes.demo-api-a.channels: sysChannel-1, sysChannel-2

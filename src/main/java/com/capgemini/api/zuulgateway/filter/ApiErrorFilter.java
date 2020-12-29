@@ -21,6 +21,7 @@ public class ApiErrorFilter extends SendErrorFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         Throwable exception = ctx.getThrowable();
+        exception.printStackTrace();
         Throwable rootCause = exception.getCause();
         boolean handled = false;
         while (rootCause != exception.getCause()) {
